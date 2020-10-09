@@ -7,6 +7,7 @@ v0.1 - configured basic file structure
 v0.2 - added functions for player attack, monster attack
 v0.3 - added random crits
 v0.4 - added player mana, heal logic, win/loss conditions
+v0.5 - improved combat log and win/loss conditions
 */
 
 console.log('Boss Battler v0.4');
@@ -29,6 +30,9 @@ let gameOver = false;
 // Bug: When a critical strike occurs, it always seems to have the same value.
 
 function damageMonster(playerAttackDamage) {
+    if (gameOver == true) {
+        return;
+    }
     let critChance = Math.floor((Math.random() * 100));
     if (critChance > 80) {
         playerAttackDamage = playerAttackDamage * critStrikeMultiplier
@@ -43,10 +47,14 @@ function damageMonster(playerAttackDamage) {
     if (bossHealth.value <= 0){
         console.log('GAME OVER! You win.');
         alert('GAME OVER! You win.');
+        gameOver = true;
     }
 };
 
 function damagePlayer(monsterAttackDamage) {
+    if (gameOver == true) {
+        return;
+    }
     let critChance = Math.floor((Math.random() * 100));
     if (critChance > 80) {
         monsterAttackDamage = monsterAttackDamage * critStrikeMultiplier;
@@ -61,6 +69,7 @@ function damagePlayer(monsterAttackDamage) {
     if (playerHealth.value <= 0){
         console.log('GAME OVER! You lost.');
         alert('GAME OVER! You lost.');
+        gameOver = true;
     }
 };
 
@@ -74,13 +83,17 @@ attackBtn.addEventListener('click', function() {
 });
 
 healBtn.addEventListener('click', function() {
-    if (playerMana.value >= 10){
+    if (gameOver == false && playerMana.value >= 10){
         playerHealth.value = +playerHealth.value + healPlayerAmount;
         healPlayer(healPlayerAmount);
         damagePlayer(monsterAttackDamage);
         console.log('You heal for: ' + healPlayerAmount);
         } else {
+            if (gameOver) {
+                alert('GAME OVER!');
+            } else {
             console.log('Not Enough Mana!');
             alert('Not Enough Mana!')
+            }
         }
 });

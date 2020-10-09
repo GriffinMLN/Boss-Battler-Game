@@ -10,7 +10,7 @@ v0.4 - added player mana, heal logic, win/loss conditions
 v0.5 - improved combat log and win/loss conditions
 */
 
-console.log('Boss Battler v0.4');
+console.log('Boss Battler v0.5');
 console.log('Battle Start:');
 
 const bossHealth = document.getElementById('monster-health');

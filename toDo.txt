@@ -16,3 +16,5 @@
 [ ] - add cooldowns
 [ ] - check if turn-based combat feels better
 [ ] - refactor code
+[ ] - update readme
+[ ] - add code of conduct/contributions

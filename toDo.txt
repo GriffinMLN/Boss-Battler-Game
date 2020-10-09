@@ -1,0 +1,15 @@
+[x] - add basic html/css
+[x] - add player health
+[x] - add boss health
+[x] - add player to attack/heal buttons
+[x] - add player attack logic
+[x] - add boss attack logic
+[x] - add random crits
+[ ] - add player heal logic
+[ ] - add boss enrage state
+[ ] - add win/loss conditions
+[ ] - add reset game button
+[ ] - add player skills buttons (heavy attack, block, DOTs, HOTs, potion)
+[ ] - add player skills logic
+[ ] - add cooldowns
+[ ] - check if turn-based combat feels better

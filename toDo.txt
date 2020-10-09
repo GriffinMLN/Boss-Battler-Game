@@ -5,9 +5,10 @@
 [x] - add player attack logic
 [x] - add boss attack logic
 [x] - add random crits
-[ ] - add player heal logic
+[x] - add player heal logic
+[x] - add player mana
 [ ] - add boss enrage state
-[ ] - add win/loss conditions
+[x] - add win/loss conditions
 [ ] - add reset game button
 [ ] - add player skills buttons (heavy attack, block, DOTs, HOTs, potion)
 [ ] - add player skills logic

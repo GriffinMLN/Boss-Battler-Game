@@ -20,7 +20,7 @@ const healBtn = document.getElementById('heal-btn');
 const critStrikeMultiplier = 3;
 const defaultPlayerDamage = Math.floor((Math.random() * (35 - 25) + 25));
 const defaultMonsterDamage = Math.floor((Math.random() * (5 - 2) + 2));
-const healPlayerAmount = Math.floor((Math.random() * (12 - 8) + 8))
+const healPlayerAmount = Math.floor((Math.random() * (15 - 8) + 8))
 const healManaCost = 10;
 let playerAttackDamage = defaultPlayerDamage;
 let monsterAttackDamage = defaultMonsterDamage;
@@ -78,6 +78,7 @@ healBtn.addEventListener('click', function() {
         playerHealth.value = +playerHealth.value + healPlayerAmount;
         healPlayer(healPlayerAmount);
         damagePlayer(monsterAttackDamage);
+        console.log('You heal for: ' + healPlayerAmount);
         } else {
             console.log('Not Enough Mana!');
             alert('Not Enough Mana!')

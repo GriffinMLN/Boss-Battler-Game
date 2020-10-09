@@ -4,6 +4,7 @@
 [x] - add player to attack/heal buttons
 [x] - add player attack logic
 [x] - add boss attack logic
+[x] - add combat log
 [x] - add random crits
 [x] - add player heal logic
 [x] - add player mana
@@ -14,3 +15,4 @@
 [ ] - add player skills logic
 [ ] - add cooldowns
 [ ] - check if turn-based combat feels better
+[ ] - refactor code

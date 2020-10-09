@@ -8,26 +8,34 @@ v0.2 - added functions for player attack, monster attack
 v0.3 - added random crits
 v0.4 - added player mana, heal logic, win/loss conditions
 v0.5 - improved combat log and win/loss conditions
+v0.6 - improved UI, added reset game functionality
+v0.7 - added boss enrage state
 */
 
-console.log('Boss Battler v0.5');
-console.log('Battle Start:');
+// Bug: When a critical strike occurs, it always seems to have the same value.
 
+const currentVersion = 'v0.7'
 const bossHealth = document.getElementById('monster-health');
 const playerHealth = document.getElementById('player-health');
 const playerMana = document.getElementById('player-mana');
 const attackBtn = document.getElementById('attack-btn');
 const healBtn = document.getElementById('heal-btn');
+const resetBtn = document.getElementById('reset-btn');
+const bossMaxHealth = 1000;
+const playerMaxHealth = 100;
+const playerMaxMana = 100;
 const critStrikeMultiplier = 3;
 const defaultPlayerDamage = Math.floor((Math.random() * (35 - 25) + 25));
 const defaultMonsterDamage = Math.floor((Math.random() * (5 - 2) + 2));
-const healPlayerAmount = Math.floor((Math.random() * (15 - 8) + 8))
+const healPlayerAmount = Math.floor((Math.random() * (30 - 20) + 20))
 const healManaCost = 10;
 let playerAttackDamage = defaultPlayerDamage;
 let monsterAttackDamage = defaultMonsterDamage;
+let bossEnrageDmgMultiplier = false;
 let gameOver = false;
 
-// Bug: When a critical strike occurs, it always seems to have the same value.
+console.log('Boss Battler ' + currentVersion);
+console.log('Battle Start:');
 
 function damageMonster(playerAttackDamage) {
     if (gameOver == true) {
@@ -45,8 +53,8 @@ function damageMonster(playerAttackDamage) {
     bossHealth.value = +bossHealth.value - checkNormalAtk;
     }
     if (bossHealth.value <= 0){
-        console.log('GAME OVER! You win.');
-        alert('GAME OVER! You win.');
+        console.log('Game Over! YOU WIN.');
+        alert('Game Over! YOU WIN.');
         gameOver = true;
     }
 };
@@ -57,21 +65,32 @@ function damagePlayer(monsterAttackDamage) {
     }
     let critChance = Math.floor((Math.random() * 100));
     if (critChance > 80) {
+        bossEnraged()
         monsterAttackDamage = monsterAttackDamage * critStrikeMultiplier;
         console.log('Boss hits you for: ' + monsterAttackDamage + ' Critical strike!');
         playerHealth.value = +playerHealth.value - monsterAttackDamage;
         monsterAttackDamage = defaultMonsterDamage;
     } else {
-    const checkNormalAtk = Math.floor((Math.random() * 10) + monsterAttackDamage);
-    console.log('Boss hits you for: ' + checkNormalAtk);
-    playerHealth.value = +playerHealth.value - checkNormalAtk;
-    }
-    if (playerHealth.value <= 0){
-        console.log('GAME OVER! You lost.');
-        alert('GAME OVER! You lost.');
+        bossEnraged()
+        const checkNormalAtk = Math.floor((Math.random() * 10) + monsterAttackDamage);
+        console.log('Boss hits you for: ' + checkNormalAtk);
+        playerHealth.value = +playerHealth.value - checkNormalAtk;
+    } if (playerHealth.value <= 0){
+        console.log('Game Over! YOU LOST.');
+        alert('Game Over! YOU LOST.');
         gameOver = true;
     }
 };
+
+function bossEnraged() {
+    if (bossHealth.value <= (bossMaxHealth * 0.25) && !bossEnrageDmgMultiplier){
+        console.log('BOSS ENRAGED');
+        monsterAttackDamage = monsterAttackDamage * 1.5;
+        bossEnrageDmgMultiplier = true;
+    } else {
+        return;
+    }
+}
 
 function healPlayer() {
     playerMana.value = +playerMana.value - healManaCost;
@@ -90,10 +109,22 @@ healBtn.addEventListener('click', function() {
         console.log('You heal for: ' + healPlayerAmount);
         } else {
             if (gameOver) {
-                alert('GAME OVER!');
+                return;
             } else {
             console.log('Not Enough Mana!');
             alert('Not Enough Mana!')
             }
         }
+});
+
+function resetGame() {
+    console.log('| - - - Resetting Game. - - - |');
+    bossHealth.value = bossMaxHealth;
+    playerHealth.value = playerMaxHealth;
+    playerMana.value = playerMaxMana;
+    gameOver = false;
+}
+
+resetBtn.addEventListener('click', function() {
+    resetGame();
 });

@@ -11,11 +11,11 @@
 [x] - add boss enrage state
 [x] - add win/loss conditions
 [x] - add reset game button
+[x] - refactor code
 [ ] - update readme
 [ ] - add code of conduct
 [ ] - add contributing
 [ ] - add changelog
-[ ] - refactor code
 [ ] - add player skills buttons (heavy attack, block, DOTs, HOTs, potion)
 [ ] - add player skills logic
 [ ] - add cooldowns

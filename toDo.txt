@@ -12,7 +12,7 @@
 [x] - add win/loss conditions
 [x] - add reset game button
 [x] - refactor code
-[ ] - update readme
+[ ] - update readme file
 [ ] - add code of conduct
 [ ] - add contributing
 [ ] - add changelog
